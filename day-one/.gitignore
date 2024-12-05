@@ -1,0 +1,12 @@
+## haskell
+dist-newstyle/
+.stack-work/
+
+## rust
+/target
+**/*.rs.bk
+Cargo.lock
+
+## zig
+.zig-cache/
+zig-out/

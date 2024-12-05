@@ -1,0 +1,9 @@
+cabal-version:       3.12.1.0
+name:                day-x
+version:             0.1.0.0
+
+executable day-one
+  main-is:             src/Main.hs
+  default-language:    Haskell2010
+  build-depends:
+    base >= 4.14
