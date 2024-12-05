@@ -10,10 +10,26 @@ mkdir day-x
 
 ### Haskell
 
+initialization
+
+```bash
+stack new project-name simple
+```
+
+run
+
+```bash
+cabal build
+stack repl
+:l src/Main.hs
+main
+```
+
 ### Zig
 
 ```bash
 zig init
+zig build run
 ```
 
 then replace `build.zig` with `.build.zig`
@@ -22,4 +38,5 @@ then replace `build.zig` with `.build.zig`
 
 ```bash
 cargo init
+cargo run
 ```
