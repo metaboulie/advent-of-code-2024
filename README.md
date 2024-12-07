@@ -18,3 +18,7 @@ languages = [
     "Groovy", "Mojo", "Carbon"
 ]
 ```
+
+## Day 8
+
+Kotlin
