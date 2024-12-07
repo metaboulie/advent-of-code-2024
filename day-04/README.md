@@ -29,3 +29,7 @@ for all X, for all M after_match, for all A after_match, for all S after_match,
 acc += 1
 
 acc should be a global state
+
+> [!caution]
+>
+> i think haskell is not suitable for this puzzle
