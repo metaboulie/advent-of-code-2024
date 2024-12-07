@@ -35,3 +35,9 @@ if the guard turn 90 at the position before this position, she should be able
 to meet the first position at the Queue
 
 everytime the check function return true, acc += 1
+
+---
+
+Yeah, I thought rectangle was the only loop form, but it's not.
+
+I failed loudly.
