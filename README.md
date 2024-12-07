@@ -1,42 +1,20 @@
 # Advent of code 2024
 
-> trying to resolve every problem with haskell, rust and zig
+> use a random & different ~~modern~~ programming language everyday
 
-## How to initialize a project for each lang
+> [!warning]
+>
+> The discipline starts from **Day 8**, so any code before day 8 is 🗑️
 
-```bash
-mkdir day-x
-```
+## All candidates
 
-### Haskell
-
-initialization
-
-```bash
-stack new project-name simple
-```
-
-run
-
-```bash
-cabal build
-stack repl
-:l src/Main.hs
-main
-```
-
-### Zig
-
-```bash
-zig init
-zig build run
-```
-
-then replace `build.zig` with `.build.zig`
-
-### Rust
-
-```bash
-cargo init
-cargo run
+```python
+languages = [
+    "Rust", "Go", "Kotlin", "Swift", "Julia", "Dart",
+    "Elixir", "Crystal", "F#", "Haskell", "Gleam",
+    "Clojure", "Elm", "Reason", "Nim", "Zig",
+    "V", "Solidity", "Chapel", "Idris", "Erlang",
+    "Lua", "OCaml", "Perl 6 (Raku)", "Red",
+    "Groovy", "Mojo", "Carbon"
+]
 ```
