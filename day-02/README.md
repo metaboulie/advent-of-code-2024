@@ -1,5 +1,7 @@
 # day-two
 
+Yeah, I only used haskell to resolve this puzzle.
+
 ## question 1
 
 1. read into rows: `list[list[int]]`
