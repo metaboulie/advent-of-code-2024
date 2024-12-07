@@ -1,79 +1,119 @@
-"""Advent of code 2024. Day 7."""
+"""
+Advent of Code 2024 - Day 7: Expression Evaluation Puzzle.
 
+This puzzle involves finding valid mathematical expressions that evaluate to target values
+using three operators: addition (+), multiplication (*), and concatenation (|).
+"""
 
 from dataclasses import dataclass, field
 from itertools import product
 from typing import Literal
 
-Operator = Literal["+", "*", "|"]
+OperatorType = Literal["+", "*", "|"]
+VALID_OPERATORS: tuple[OperatorType, ...] = ("+", "*", "|")
 
 
 @dataclass
-class Row:
-    """Row data."""
+class ExpressionPuzzle:
+    """Represents a single expression puzzle with a target value and sequence of numbers."""
 
-    calibration: int = field(init=True)
-    numbers: list[int] = field(init=True)
-    operator_combinations: list[tuple[str]] = field(init=False)
-    equation_results: list[int] = field(init=False)
-    result: bool = field(init=False, default=False)
+    target_value: int
+    sequence: list[int]
+    possible_expressions: list[tuple[str, ...]] = field(init=False)
+    evaluated_results: list[int] = field(init=False)
+    has_solution: bool = field(init=False, default=False)
 
     def __post_init__(self) -> None:
-        """Post calculation."""
-        self.operator_combinations = list(
-            product("+*|", repeat=len(self.numbers) - 1)
+        """Initialize possible expressions and evaluate results."""
+        self.possible_expressions = list(
+            product(VALID_OPERATORS, repeat=len(self.sequence) - 1)
         )
-        self.equation_results = self.get_equation_result()
+        self.evaluated_results = self._evaluate_all_expressions()
+        self.has_solution = self.target_value in self.evaluated_results
 
-        self.result = any(
-            result == self.calibration
-            for result in self.equation_results
-        )
+    def _evaluate_all_expressions(self) -> list[int]:
+        """Evaluate all possible expressions using the number sequence."""
+        return [
+            self._evaluate_single_expression(self.sequence, operators)
+            for operators in self.possible_expressions
+        ]
 
-    def get_equation_result(self) -> list[int]:
-        def calculate(a: int, b: int, operator: Operator) -> int:
+    @staticmethod
+    def _evaluate_single_expression(
+        numbers: list[int], operators: tuple[str, ...]
+    ) -> int:
+        """Evaluate a single expression with given numbers and operators."""
+
+        def apply_operator(a: int, b: int, operator: OperatorType) -> int:
             match operator:
                 case "+":
                     return a + b
                 case "*":
                     return a * b
                 case "|":
-                    return int(str(a) + str(b))
+                    return int(f"{a}{b}")
                 case _:
-                    return a + b
-        def calculate_result(numbers: list[int], operators: list[Operator]) -> int:
-            numbers_, operators_ = numbers[:], list(operators)
-            while len(numbers_) > 1:
-                a, b, operator = numbers_.pop(0), numbers_.pop(0), operators_.pop(0)
-                c = calculate(a, b, operator)
-                numbers_.insert(0, c)
-            return numbers_[0]
-        return [calculate_result(self.numbers, operators) for operators in self.operator_combinations]
+                    msg = f"Unknown operator: {operator}"
+                    raise ValueError(msg)
+
+        numbers_copy = numbers.copy()
+        operators_list = list(operators)
+
+        while len(numbers_copy) > 1:
+            left = numbers_copy.pop(0)
+            right = numbers_copy.pop(0)
+            operator = operators_list.pop(0)
+            result = apply_operator(left, right, operator)
+            numbers_copy.insert(0, result)
+
+        return numbers_copy[0]
 
 
-def get_row_from_line(line: str) -> Row:
-    calibration, numbers = line.split(":")
-    numbers = [int(number) for number in numbers.strip().split(" ")]
-    calibration = int(calibration)
+def parse_puzzle_line(line: str) -> ExpressionPuzzle:
+    """Parse a single line into an ExpressionPuzzle instance."""
+    target_str, sequence_str = line.split(":")
+    target = int(target_str)
+    sequence = [int(num) for num in sequence_str.strip().split()]
 
-    return Row(calibration=calibration, numbers=numbers)
-
-
-def read_file(file: str) -> list[Row]:
-    with open(file) as f:
-        lines = f.readlines()
-    return list(map(get_row_from_line, lines))
+    return ExpressionPuzzle(target_value=target, sequence=sequence)
 
 
-def sum_result(data: list[Row]) -> int:
-    """Sum the result."""
-    return sum([row.calibration for row in data if row.result])
+def load_puzzles(filepath: str) -> list[ExpressionPuzzle]:
+    """Load all puzzles from the input file."""
+    with open(filepath) as file:
+        return [parse_puzzle_line(line.strip()) for line in file]
 
 
-def main(file_name: str) -> None:
-    rows = read_file(file_name)
-    print(sum_result(rows))
+def calculate_solution_sum(puzzles: list[ExpressionPuzzle]) -> int:
+    """Calculate the sum of target values for puzzles with valid solutions."""
+    return sum(
+        puzzle.target_value for puzzle in puzzles if puzzle.has_solution
+    )
+
+
+def solve_puzzle_part1(filepath: str) -> int:
+    """Solve part 1 of the puzzle (only + and * operators)."""
+    global VALID_OPERATORS
+    VALID_OPERATORS = ("+", "*")
+    puzzles = load_puzzles(filepath)
+    return calculate_solution_sum(puzzles)
+
+
+def solve_puzzle_part2(filepath: str) -> int:
+    """Solve part 2 of the puzzle (includes concatenation operator |)."""
+    global VALID_OPERATORS
+    VALID_OPERATORS = ("+", "*", "|")
+    puzzles = load_puzzles(filepath)
+    return calculate_solution_sum(puzzles)
+
 
 if __name__ == "__main__":
-    file_name = "inputs.txt"
-    main(file_name)
+    input_filepath = "inputs.txt"
+
+    # Solve Part 1
+    result_part1 = solve_puzzle_part1(input_filepath)
+    print(f"Part 1 Solution: {result_part1}")
+
+    # Solve Part 2
+    result_part2 = solve_puzzle_part2(input_filepath)
+    print(f"Part 2 Solution: {result_part2}")
