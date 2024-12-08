@@ -6,12 +6,12 @@ languages = [
     "Elixir", "Crystal", "F#", "Haskell", "Gleam",
     "Clojure", "Elm", "Reason", "Nim", "Zig",
     "V", "Solidity", "Chapel", "Idris", "Erlang",
-    "Lua", "OCaml", "Perl 6 (Raku)", "Red",
-    "Groovy", "Mojo", "Carbon"
+    "Lua", "Perl 6 (Raku)", "Red",
+    "Groovy", "Mojo", "Carbon", "Scala"
 ]
 
 selected_langs = [
-    "Kotlin",
+    "Kotlin", "OCaml"
 ]
 
 
