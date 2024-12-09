@@ -15,10 +15,14 @@ languages = [
     "Clojure", "Elm", "Reason", "Nim", "Zig",
     "V", "Solidity", "Chapel", "Idris", "Erlang",
     "Lua", "OCaml", "Perl 6 (Raku)", "Red",
-    "Groovy", "Mojo", "Carbon"
+    "Groovy", "Mojo", "Carbon", "Scala"
 ]
 ```
 
 ## Day 8
 
 Kotlin
+
+## Day 9
+
+OCaml

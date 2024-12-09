@@ -2,16 +2,16 @@ import random
 
 
 languages = [
-    "Rust", "Go", "Swift", "Julia", "Dart",
-    "Elixir", "Crystal", "F#", "Haskell", "Gleam",
-    "Clojure", "Elm", "Reason", "Nim", "Zig",
-    "V", "Solidity", "Chapel", "Idris", "Erlang",
+    "Swift", "Dart",
+    "Elixir", "Crystal", "F#",
+    "Clojure", "Elm", "Reason", "Nim",
+    "V", "Solidity", "Chapel", "Idris",
     "Lua", "Perl 6 (Raku)", "Red",
     "Groovy", "Mojo", "Carbon", "Scala"
 ]
 
 selected_langs = [
-    "Kotlin", "OCaml"
+    "Kotlin", "OCaml", "Rust", "Julia"
 ]
 
 
