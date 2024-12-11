@@ -13,9 +13,7 @@ class Evaluation(NamedTuple):
     factor: float
 
 
-def evaluation_loop(
-    evaluations: list[Evaluation], num_blink: int
-) -> list[Evaluation]:
+def evaluation_loop(evaluations: list[Evaluation], num_blink: int) -> list[Evaluation]:
     # Main loop that processes evaluations for the specified number of blinks
     # Each iteration transforms the current evaluations into their children
     for _ in range(num_blink):
@@ -26,9 +24,7 @@ def evaluation_loop(
 def get_children_evaluations(evaluations: list[Evaluation]):
     # Generates all possible child evaluations from the current set
     # Flattens the list of children and combines duplicate states
-    children = [
-        child for eval in evaluations for child in child_evaluation(eval)
-    ]
+    children = [child for eval in evaluations for child in child_evaluation(eval)]
     return combine_evaluations(children)
 
 
@@ -72,8 +68,7 @@ if __name__ == "__main__":
 
     def run_evaluation():
         return sum(
-            eval.factor
-            for eval in evaluation_loop(initial_evaluations, num_blink)
+            eval.factor for eval in evaluation_loop(initial_evaluations, num_blink)
         )
 
     # Time the execution of the run_evaluation function 10 times
