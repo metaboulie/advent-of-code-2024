@@ -60,10 +60,7 @@ class Map:
             ):
                 continue
 
-            if (
-                self.data[next_position["y"]][next_position["x"]]
-                == target_number
-            ):
+            if self.data[next_position["y"]][next_position["x"]] == target_number:
                 positions.append(next_position)
 
         return positions

@@ -25,9 +25,7 @@ class ExpressionPuzzle:
 
     def __post_init__(self) -> None:
         """Initialize possible expressions and evaluate results."""
-        self.possible_expressions = list(
-            product(VALID_OPERATORS, repeat=len(self.sequence) - 1)
-        )
+        self.possible_expressions = list(product(VALID_OPERATORS, repeat=len(self.sequence) - 1))
         self.evaluated_results = self._evaluate_all_expressions()
         self.has_solution = self.target_value in self.evaluated_results
 
@@ -39,9 +37,7 @@ class ExpressionPuzzle:
         ]
 
     @staticmethod
-    def _evaluate_single_expression(
-        numbers: list[int], operators: tuple[str, ...]
-    ) -> int:
+    def _evaluate_single_expression(numbers: list[int], operators: tuple[str, ...]) -> int:
         """Evaluate a single expression with given numbers and operators."""
 
         def apply_operator(a: int, b: int, operator: OperatorType) -> int:
@@ -86,9 +82,7 @@ def load_puzzles(filepath: str) -> list[ExpressionPuzzle]:
 
 def calculate_solution_sum(puzzles: list[ExpressionPuzzle]) -> int:
     """Calculate the sum of target values for puzzles with valid solutions."""
-    return sum(
-        puzzle.target_value for puzzle in puzzles if puzzle.has_solution
-    )
+    return sum(puzzle.target_value for puzzle in puzzles if puzzle.has_solution)
 
 
 def solve_puzzle_part1(filepath: str) -> int:
