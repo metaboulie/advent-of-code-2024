@@ -73,7 +73,6 @@ parseGrid input = do
     firstLine <- listToMaybe lines'
     let width = length firstLine
 
-    -- Find starting position and direction
     (startX, startY, startDir) <-
         listToMaybe
             [ (x, y, dir)
@@ -117,7 +116,6 @@ data PathState = PathState
     , loopPositions :: Set.Set Position
     }
 
--- Check if four points form a valid loop
 isValidLoop :: TurnPoint -> TurnPoint -> TurnPoint -> Position -> Bool
 isValidLoop p1 p2 p3 pos =
     let (x1, y1) = turnPos p1
@@ -127,7 +125,6 @@ isValidLoop p1 p2 p3 pos =
      in -- Check if points form a rectangle
         ((x1 - x2) == (x4 - x3) && (y1 - y2) == (y4 - y3))
 
--- Modified step function to track turning points
 stepWithTurns :: PathState -> Maybe PathState
 stepWithTurns PathState{..} = do
     let State{..} = currentState
@@ -165,7 +162,6 @@ stepWithTurns PathState{..} = do
                                 , loopPositions = newLoopPositions
                                 }
 
--- Check if current position could form a loop
 checkLoopPosition :: Seq TurnPoint -> Position -> Position -> Set.Set Position
 checkLoopPosition turns currentPos next =
     if Seq.length turns < 3
