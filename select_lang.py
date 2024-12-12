@@ -2,17 +2,18 @@ import random
 
 
 languages = [
-    "Swift", "Dart",
-    "Elixir", "Crystal", "F#",
-    "Clojure", "Elm", "Reason", "Nim",
-    "V", "Solidity", "Chapel", "Idris",
-    "Lua", "Perl 6 (Raku)", "Red",
-    "Groovy", "Mojo", "Carbon", "Scala"
+    "Swift",
+    "Crystal",
+    "Elm",
+    "Nim",
+    "Zig",
+    "Python",
+    "Rust",
+    "Haskell",
+    "Kotlin",
 ]
 
-selected_langs = [
-    "Kotlin", "OCaml", "Rust", "Julia"
-]
+selected_langs = ["Kotlin", "OCaml", "Rust", "Julia", "Scala", "Dart", "Elixir", "Mojo"]
 
 
 def main(languages: list[str] = languages) -> None:
